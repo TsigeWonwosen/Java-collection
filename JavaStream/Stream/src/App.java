@@ -1,9 +1,15 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.swing.ListCellRenderer;
+import javax.swing.event.ListDataEvent;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -72,9 +78,9 @@ public class App {
         .collect(Collectors.groupingBy(Person::getGender));
 
    groupByGender.forEach((gender, people1) -> {
-     System.out.println(gender);
-     people1.forEach(System.out::println);
-     System.out.println();
+     //System.out.println(gender);
+     //people1.forEach(System.out::println);
+     //System.out.println();
    });
 
     Optional<String> oldestFemaleAge = persons.stream()
@@ -82,7 +88,20 @@ public class App {
         .max(Comparator.comparing(Person::getAge))
         .map(Person::getName);
 
-    oldestFemaleAge.ifPresent(System.out::println);
+    // oldestFemaleAge.ifPresent(System.out::println);
+    System.out.println();
+    System.out.println("Sum of numbers : " + SumIntegers(20,30,40,50));
+    System.out.println("Sum of numbers : " + SumIntegers(1,2,4,5,6,7,8,90,4));
+
+    String name = "wonde";
+    int age = 34;
+    String address = "Torino";
+
+    List info = Arrays.asList(name, age, address,"Test");
+
+    //System.out.println(info);
+    Fabonacci(10);
+    System.out.println();
   }
 
     
@@ -97,5 +116,35 @@ public class App {
         new Person("Anna Cook", 7, Gender.FEMALE),
         new Person("Zelda Brown", 120, Gender.FEMALE)
     );
-  }
+
+}
+static int SumIntegers(int ... numbers) {
+
+    int sum = 0;
+    for (Integer num : numbers) {
+        sum += num; 
+    }
+    return sum;
+}
+
+static int Fabonacci(int num){
+    // List<Integer> feb = new LinkedList<>();
+
+    // feb = Stream.
+    int[] fabonacci = new int[num];
+    int sum = 0;
+    fabonacci[0]= 1;
+    fabonacci[1] = 1;
+    for (int i = 2; i < num; i++) {
+        fabonacci[i] = fabonacci[i - 1] + fabonacci[i - 2];
+
+    }
+    for(int i : fabonacci) {
+        System.out.print(" " + i);
+        sum += i;
+    }
+   // sum = fabonacci.stream().reduce(0,(subTotal ,element ) -> subTotal + element);
+    return sum;
+
+}
 }
